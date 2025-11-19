@@ -16,6 +16,10 @@
 
 - `Go run ./cmd/. /path/to/file`
 
+#### Example
+
+![Run In Directory](./assets/go-run-directory.png)
+
 ### If not wanting to cd in to the root directory to always edit files (Only tested on Linux)
 
 - `cd root directory`
@@ -25,3 +29,7 @@
 - `mv {output name} ~/.local/bin`
 
 - `{output name} /path/to/file`
+
+#### Example
+
+![Run From Build Binary](./assets/go-build.png)
