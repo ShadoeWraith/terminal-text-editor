@@ -24,7 +24,6 @@ func (m Model) Init() tea.Cmd {
 
 func InitialModel(filename string) Model {
 	ti := textarea.New()
-	ti.Placeholder = "Once upon a time..."
 	ti.Focus()
 
 	ti.SetWidth(80)

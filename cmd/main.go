@@ -16,7 +16,6 @@ func main() {
 		filename = os.Args[1]
 	}
 
-	// Now calls the standalone function `initialModel`
 	p := tea.NewProgram(initialModel(filename), tea.WithAltScreen())
 
 	if _, err := p.Run(); err != nil {

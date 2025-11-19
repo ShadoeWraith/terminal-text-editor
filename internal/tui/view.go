@@ -7,11 +7,7 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
-
-
-
 func (m Model) View() string {
-	// Define Styles
 	headerStyle := lipgloss.NewStyle().
 		Bold(true).
 		Foreground(lipgloss.Color("63")).
@@ -26,29 +22,21 @@ func (m Model) View() string {
 		Padding(0, 1).
 		MarginTop(1)
 
-	// Build the UI parts
-	headerText := "GopherEdit - Minimal TUI Editor"
+	headerText := "Go Editor - [untitled.txt]"
 	if m.filename != "" {
-		// If a file is loaded, show the base filename in the header
-		headerText = fmt.Sprintf("GopherEdit - %s", filepath.Base(m.filename))
-
-		if m.loadedContentLength > 0 {
-			headerText = fmt.Sprintf("%s (%d chars)", headerText, m.loadedContentLength)
-		}
+		headerText = fmt.Sprintf("Go Edit - [%s]", filepath.Base(m.filename))	
 	}
 
 	header := headerStyle.Render(headerText)
 	status := ""
 	if m.err != nil {
-		status = lipgloss.NewStyle().Foreground(lipgloss.Color("#FF0000")).Render(m.err.Error()) // Red error message
+		status = lipgloss.NewStyle().Foreground(lipgloss.Color("#FF0000")).Render(m.err.Error())
 	}
 
-	// Normal view: Header, Textarea, Footer
 	return lipgloss.JoinVertical(lipgloss.Left,
 		header,
-		m.textarea.View(), // Renders the actual text editor
+		m.textarea.View(),
 		status,
-		// UPDATED FOOTER MESSAGE
-		footerStyle.Render("Keys: ESC to blur, any key to focus, Ctrl+C to quit, Ctrl+A to select all"),
+		footerStyle.Render("Keys: Ctrl+C to quit"),
 	)
 }
