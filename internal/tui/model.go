@@ -23,20 +23,20 @@ func (m Model) Init() tea.Cmd {
 }
 
 func InitialModel(filename string) Model {
-	ti := textarea.New()
-	ti.Focus()
+	ta := textarea.New()
+	ta.Focus()
 
-	ti.SetWidth(80)
-	ti.SetHeight(20)
+	ta.SetWidth(80)
+	ta.SetHeight(20)
 
-	ti.FocusedStyle.CursorLine = lipgloss.NewStyle().
+	ta.FocusedStyle.CursorLine = lipgloss.NewStyle().
 		Background(lipgloss.Color("236")).
 		Foreground(lipgloss.Color("252"))
-	ti.FocusedStyle.Prompt = lipgloss.NewStyle().Foreground(lipgloss.Color("10")).Bold(true)
-	ti.FocusedStyle.Text = lipgloss.NewStyle().Foreground(lipgloss.Color("252"))
+	ta.FocusedStyle.Prompt = lipgloss.NewStyle().Foreground(lipgloss.Color("10")).Bold(true)
+	ta.FocusedStyle.Text = lipgloss.NewStyle().Foreground(lipgloss.Color("252"))
 
 	m := Model{
-		textarea: ti, 
+		textarea: ta, 
 		filename: filename,
 		err:      nil,
 	}
