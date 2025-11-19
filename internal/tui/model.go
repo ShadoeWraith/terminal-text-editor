@@ -2,7 +2,6 @@ package tui
 
 import (
 	"fmt"
-	"os"
 	"path/filepath"
 
 	"github.com/charmbracelet/bubbles/textarea"
@@ -12,7 +11,6 @@ import (
 
 type ErrMsg error
 
-// Model represents the entire state of our TUI application.
 type Model struct {
 	textarea            textarea.Model
 	filename            string
@@ -20,27 +18,18 @@ type Model struct {
 	err                 error
 }
 
-// Model represents the entire state of our TUI application.
-
-// Init implements tea.Model.
 func (m Model) Init() tea.Cmd {
 	return textarea.Blink
 }
 
-// --- Initialization Logic ---
-
-// initialModel is the function that initializes the Model, following the tea.Model interface.
 func InitialModel(filename string) Model {
-	// 1. Initialize the textarea component
 	ti := textarea.New()
 	ti.Placeholder = "Once upon a time..."
 	ti.Focus()
 
-	// Set initial dimensions
 	ti.SetWidth(80)
 	ti.SetHeight(20)
 
-	// Apply custom styling (matching your previous styles)
 	ti.FocusedStyle.CursorLine = lipgloss.NewStyle().
 		Background(lipgloss.Color("236")).
 		Foreground(lipgloss.Color("252"))
@@ -48,29 +37,20 @@ func InitialModel(filename string) Model {
 	ti.FocusedStyle.Text = lipgloss.NewStyle().Foreground(lipgloss.Color("252"))
 
 	m := Model{
-		textarea: ti, // Attach the newly created textarea
+		textarea: ti, 
 		filename: filename,
 		err:      nil,
 	}
 
-	// 2. File Reading Logic
-	if filename != "" {
-		content, err := os.ReadFile(filename)
-		if err == nil {
-			// File read successfully, load content into the editor
-			contentStr := string(content)
-			m.textarea.SetValue(contentStr) // Set the value on the attached textarea
-			m.loadedContentLength = len(contentStr)
 
-			// NEW: Set the cursor to the beginning of the document (index 0)
-			// Check for empty file
-			if len(contentStr) == 0 {
-				m.err = fmt.Errorf("file '%s' loaded successfully, but is empty (0 characters)", filepath.Base(filename))
-			}
-		} else if os.IsNotExist(err) {
-			m.err = fmt.Errorf("file not found: %s. Starting with empty buffer", filepath.Base(filename))
-		} else {
-			m.err = fmt.Errorf("error reading file %s: %v", filepath.Base(filename), err)
+	content, err := readFileContents(filename)
+	if err == nil {
+		contentStr := string(content)
+		m.textarea.SetValue(contentStr)
+		m.loadedContentLength = len(contentStr)
+
+		if len(contentStr) == 0 {
+			m.err = fmt.Errorf("file '%s' loaded successfully, but is empty (0 characters)", filepath.Base(filename))
 		}
 	}
 
