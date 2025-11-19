@@ -1,8 +1,8 @@
-package main
+package tui
 
 import tea "github.com/charmbracelet/bubbletea"
 
-func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	var cmds []tea.Cmd
 	var cmd tea.Cmd
@@ -32,7 +32,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			}
 		}
 
-	case errMsg:
+	case ErrMsg:
 		m.err = msg
 		return m, nil
 	}

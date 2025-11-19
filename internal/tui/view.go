@@ -1,4 +1,4 @@
-package main
+package tui
 
 import (
 	"fmt"
@@ -10,7 +10,7 @@ import (
 
 
 
-func (m model) View() string {
+func (m Model) View() string {
 	// Define Styles
 	headerStyle := lipgloss.NewStyle().
 		Bold(true).

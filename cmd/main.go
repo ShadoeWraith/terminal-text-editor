@@ -1,6 +1,7 @@
 package main
 
 import (
+	"go-editor/internal/tui"
 	"log"
 	"os"
 
@@ -8,6 +9,7 @@ import (
 )
 
 func main() {
+	initialModel := tui.InitialModel
 	var filename string
 
 	if len(os.Args) > 1 {

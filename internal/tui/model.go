@@ -1,4 +1,4 @@
-package main
+package tui
 
 import (
 	"fmt"
@@ -10,17 +10,27 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
-// model represents the entire state of our TUI application.
+type ErrMsg error
+
+// Model represents the entire state of our TUI application.
+type Model struct {
+	textarea            textarea.Model
+	filename            string
+	loadedContentLength int
+	err                 error
+}
+
+// Model represents the entire state of our TUI application.
 
 // Init implements tea.Model.
-func (m model) Init() tea.Cmd {
+func (m Model) Init() tea.Cmd {
 	return textarea.Blink
 }
 
 // --- Initialization Logic ---
 
-// initialModel is the function that initializes the model, following the tea.Model interface.
-func initialModel(filename string) model {
+// initialModel is the function that initializes the Model, following the tea.Model interface.
+func InitialModel(filename string) Model {
 	// 1. Initialize the textarea component
 	ti := textarea.New()
 	ti.Placeholder = "Once upon a time..."
@@ -37,7 +47,7 @@ func initialModel(filename string) model {
 	ti.FocusedStyle.Prompt = lipgloss.NewStyle().Foreground(lipgloss.Color("10")).Bold(true)
 	ti.FocusedStyle.Text = lipgloss.NewStyle().Foreground(lipgloss.Color("252"))
 
-	m := model{
+	m := Model{
 		textarea: ti, // Attach the newly created textarea
 		filename: filename,
 		err:      nil,
