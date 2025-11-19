@@ -22,7 +22,10 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
         case "save":
             contentToSave := m.textarea.Value()
             return m, SaveFileCmd(m.filename, contentToSave)
-            
+
+        case " ":
+        
+
         default:
             if !m.textarea.Focused() {
                 cmd = m.textarea.Focus()
@@ -42,6 +45,11 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
     case tea.WindowSizeMsg:
         m.textarea.SetWidth(msg.Width - 4)
         m.textarea.SetHeight(msg.Height - 5)
+
+        // I really don't like this solution but it works for now
+        for i := 0; i < m.textarea.LineCount() ; i++ {
+            m.textarea.CursorUp()
+        }
         
     case SaveCompleteMsg:
         m.isDirty = false 
