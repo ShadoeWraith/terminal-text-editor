@@ -4,13 +4,6 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 )
 
-type Msg string 
-
-type CustomKeyMap struct {
-	Quit tea.Key
-    Save tea.Key
-}
-
 func DefaultKeyMap() CustomKeyMap {
 	return CustomKeyMap{
 		Quit: tea.Key{Type: tea.KeyCtrlC, Runes: []rune("c"), Alt: false},

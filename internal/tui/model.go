@@ -9,21 +9,6 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
-type ErrMsg error
-
-type Model struct {
-	textarea            textarea.Model
-
-	keys 				CustomKeyMap
-
-	filename            string
-	loadedContentLength int
-	isDirty 			bool
-
-	err                 error
-	status 				string
-}
-
 func (m Model) Init() tea.Cmd {
 	return textarea.Blink
 }

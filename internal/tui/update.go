@@ -48,13 +48,8 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
         m.status = fmt.Sprintf("Saved successfully to %s! (%d chars)", msg.FilePath, msg.ContentLength)
         return m, tea.Batch(cmds...)
     
-    case SaveErrorMsg:
-        m.err = msg.Err 
-        m.status = "SAVE FAILED"
-        return m, tea.Batch(cmds...)
-    
     case ErrMsg:
-        m.err = msg
+        m.err = msg.Err
         return m, tea.Batch(cmds...)
     }
     
