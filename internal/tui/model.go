@@ -10,7 +10,9 @@ import (
 )
 
 func (m Model) Init() tea.Cmd {
-	return textarea.Blink
+	return tea.Batch(
+		textarea.Blink,
+	)
 }
 
 func InitialModel(filename string) Model {

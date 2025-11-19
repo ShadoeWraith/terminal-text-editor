@@ -47,9 +47,8 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
         m.textarea.SetHeight(msg.Height - 5)
 
         // I really don't like this solution but it works for now
-        for i := 0; i < m.textarea.LineCount() ; i++ {
-            m.textarea.CursorUp()
-        }
+        m.textarea.Cursor.Update(0)
+
         
     case SaveCompleteMsg:
         m.isDirty = false 
