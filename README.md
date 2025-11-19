@@ -24,7 +24,7 @@
 
 - `cd root directory`
 
-- `Go build ./cmd/main.go -o {output name}`
+- `Go build -o {output name} ./cmd/`
 
 - `mv {output name} ~/.local/bin`
 
