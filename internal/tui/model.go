@@ -13,9 +13,15 @@ type ErrMsg error
 
 type Model struct {
 	textarea            textarea.Model
+
+	keys 				CustomKeyMap
+
 	filename            string
 	loadedContentLength int
+	isDirty 			bool
+
 	err                 error
+	status 				string
 }
 
 func (m Model) Init() tea.Cmd {
@@ -37,7 +43,9 @@ func InitialModel(filename string) Model {
 
 	m := Model{
 		textarea: ta, 
+		keys: 	  DefaultKeyMap(),
 		filename: filename,
+		isDirty:  false,
 		err:      nil,
 	}
 

@@ -8,20 +8,22 @@ type Msg string
 
 type CustomKeyMap struct {
 	Quit tea.Key
+    Save tea.Key
 }
 
 func DefaultKeyMap() CustomKeyMap {
 	return CustomKeyMap{
 		Quit: tea.Key{Type: tea.KeyCtrlC, Runes: []rune("c"), Alt: false},
+        Save: tea.Key{Type: tea.KeyCtrlS, Runes: []rune("s"), Alt: false},
 	}
 }
 
-func HandleKeypress(msg tea.KeyMsg) Msg {
-    k := DefaultKeyMap() 
-
+func HandleKeypress(msg tea.KeyMsg, k CustomKeyMap) Msg {
     switch {
     case msg.String() == k.Quit.String():
-        return "quit" 
+        return "quit"
+    case msg.String() == k.Save.String():
+        return "save"
 
     default:
         return Msg(msg.String())

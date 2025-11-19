@@ -8,6 +8,12 @@ import (
 )
 
 func (m Model) View() string {
+	indicator := ""
+
+	if m.isDirty {
+		indicator = "*"
+	}
+
 	headerStyle := lipgloss.NewStyle().
 		Bold(true).
 		Foreground(lipgloss.Color("63")).
@@ -24,7 +30,7 @@ func (m Model) View() string {
 
 	headerText := "Go Editor - [untitled.txt]"
 	if m.filename != "" {
-		headerText = fmt.Sprintf("Go Edit - [%s]", filepath.Base(m.filename))	
+		headerText = fmt.Sprintf("Go Edit - [%s%s]", filepath.Base(m.filename), indicator)	
 	}
 
 	header := headerStyle.Render(headerText)
