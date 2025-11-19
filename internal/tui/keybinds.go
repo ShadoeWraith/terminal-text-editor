@@ -6,7 +6,7 @@ import (
 
 func DefaultKeyMap() CustomKeyMap {
 	return CustomKeyMap{
-		Quit: tea.Key{Type: tea.KeyCtrlC, Runes: []rune("c"), Alt: false},
+		Quit: tea.Key{Type: tea.KeyCtrlQ, Runes: []rune("q"), Alt: false},
         Save: tea.Key{Type: tea.KeyCtrlS, Runes: []rune("s"), Alt: false},
 	}
 }

@@ -43,6 +43,6 @@ func (m Model) View() string {
 		header,
 		m.textarea.View(),
 		status,
-		footerStyle.Render("Keys: Ctrl+C to quit"),
+		footerStyle.Render("Keys: Ctrl+Q to quit, Ctrl+S to save"),
 	)
 }
