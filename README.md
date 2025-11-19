@@ -9,3 +9,19 @@
 ## Not worth using right now this is just me playing with stuff
 
 ![Test Image](./assets/test.png)
+
+### If using
+
+- `cd root directory`
+
+- `Go run ./cmd/. /path/to/file`
+
+### If not wanting to cd in to the root directory to always edit files (Only tested on Linux)
+
+- `cd root directory`
+
+- `Go build ./cmd/main.go -o {output name}`
+
+- `mv {output name} ~/.local/bin`
+
+- `{output name} /path/to/file`
