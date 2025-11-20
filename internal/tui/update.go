@@ -46,10 +46,10 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
         m.textarea.SetWidth(msg.Width - 4)
         m.textarea.SetHeight(msg.Height - 5)
 
-        // I really don't like this solution but it works for now
-        m.textarea.Cursor.Update(0)
-
-        
+        for i := 0; i < m.textarea.LineCount(); i++ {
+            m.textarea.CursorUp()
+        }
+                
     case SaveCompleteMsg:
         m.isDirty = false 
         m.status = fmt.Sprintf("Saved successfully to %s! (%d chars)", msg.FilePath, msg.ContentLength)
